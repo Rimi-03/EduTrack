@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <header style="background-color: #DA6C6C" class="text-white shadow">
+    <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+      <h1 class="text-2xl font-bold">EduTrack</h1>
+      <nav class="flex space-x-4">
+        <a href="index.html" class="px-4 py-2 rounded hover:bg-white hover:text-[#AF3E3E] transition">Home</a>
+        <a href="form.html" class="px-4 py-2 bg-[#AF3E3E] text-white font-semibold rounded">Add Record</a>
+        <a href="table.html" class="px-4 py-2 rounded hover:bg-white hover:text-[#AF3E3E] transition">Student Overview</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="p-8">
+    <h2 class="text-2xl font-bold mb-6 text-center">Student Information Form</h2>
+    <form id="studentForm" class="grid grid-cols-2 gap-4 max-w-4xl mx-auto bg-white p-6 rounded shadow">
+      <input type="text" placeholder="Full Name" name="name" class="p-2 border rounded" required />
+      <input type="text" placeholder="Student ID" name="id" class="p-2 border rounded" required />
+      <input type="text" placeholder="Department" name="dept" class="p-2 border rounded" required />
+      <input type="text" placeholder="Batch" name="batch" class="p-2 border rounded" required />
+      <input type="text" placeholder="Current Semester" name="sem" class="p-2 border rounded" required />
+      <input type="number" placeholder="Credits Completed" name="credits" class="p-2 border rounded" required />
+      <input type="number" step="0.01" placeholder="CGPA" name="cgpa" class="p-2 border rounded" required />
+      <button type="submit" class="col-span-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Submit</button>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById("studentForm");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      let students = JSON.parse(localStorage.getItem("students") || "[]");
+      students.push(data);
+      localStorage.setItem("students", JSON.stringify(students));
+      form.reset();
+    });
+  </script>
+</body>
+</html>
